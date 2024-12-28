@@ -1,5 +1,5 @@
 // The version of the cache.
-const VERSION = "v1.0.2";
+const VERSION = "v1.0.3";
 
 // The name of the cache
 const CACHE_NAME = `period-tracker-${VERSION}`;
@@ -53,8 +53,7 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
-    //   const cachedResponse = await cache.match(event.request);
-      const cachedResponse = await cache.match(event.request.url);
+      const cachedResponse = await cache.match(event.request);
 
       if (cachedResponse) {
         // Return the cached response if it's available.
