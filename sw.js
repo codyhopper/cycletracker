@@ -19,7 +19,9 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
-      cache.addAll(APP_STATIC_RESOURCES);
+      // wait for caching before the service worker's install event finishes
+      // This guarantees that the static resources are properly cached before the service worker becomes active
+      await cache.addAll(APP_STATIC_RESOURCES);
     })()
   );
 });
